@@ -47,14 +47,14 @@ exports.login = async (req, res) => {
                     message: "User logged in successfully",
                     status: 200
                 };
-                const option=   {
+                const option = {
                     httpOnly: true,
                     maxAge: 3600000,
                     secure: true,
                     sameSite: "strict"
                 }
                 res.json(success);
-                res.cookie("TOKEN", token , option );
+                res.cookie("TOKEN", token, option);
             }
         }
     }
@@ -69,8 +69,7 @@ exports.login = async (req, res) => {
 
 exports.changepassword = async (req, res) => {
     try {
-        const token = req.headers.authorization.split(" ")[1] || req.header('Authorization')?.split(' ')[1];
-        const { newpass } = req.body;
+        const { newpass, token } = req.body;
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
         const user = await user.findOne({ userID: decoded.userID });
         if (!user) {
