@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 exports.auth = (req, res, next) => {
-    // const token = req.header('Authorization')?.split(' ')[1];
+    // const token = req.header('Authorization')?.split(' ')[1];  // here is two way to access token which provided by frontend
     const token = req.headers.authorization.split(" ")[1];
     if (!token) {
         const error = {
